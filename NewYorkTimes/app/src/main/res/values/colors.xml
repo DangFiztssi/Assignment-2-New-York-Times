@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryRelease">#bf303f9f</color>
+    <color name="colorAccent">#303F9F</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+
+    <!--Item Article-->
+    <color name="background_snippet">#98000000</color>
+</resources>

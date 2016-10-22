@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_between_row"
+        android:layout_marginTop="@dimen/margin_between_row"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="@dimen/font_size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_between_column"
+            android:text="@string/filter_begin_date_label"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvDateStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_between_column"
+            android:layout_weight="1"
+            android:background="@drawable/click_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:lines="1"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="22/10/2016"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_between_row"
+        android:layout_marginTop="@dimen/margin_between_row"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="@dimen/font_size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_between_column"
+            android:layout_weight="1"
+            android:text="@string/filter_sort_order_label"
+            android:textColor="@android:color/black" />
+
+        <Spinner
+            android:id="@+id/spOrder"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_between_column"
+            android:entries="@array/sort_order"
+            android:lines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_between_row"
+        android:layout_marginTop="@dimen/margin_between_row"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="@dimen/font_size_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_between_column"
+            android:layout_weight="1"
+            android:text="@string/filter_desk_value_label"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:collapseColumns="2">
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/cbArts"
+                android:layout_weight="1"
+                android:text="@string/filter_art_value"
+                android:textSize="@dimen/font_size_checkbox" />
+
+            <CheckBox
+                android:id="@+id/cbTravel"
+                android:layout_weight="1"
+                android:text="@string/filter_travel"
+                android:textSize="@dimen/font_size_checkbox" />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/cbFashion"
+                android:layout_weight="1"
+                android:text="@string/filter_fashion_style"
+                android:textSize="@dimen/font_size_checkbox" />
+
+            <CheckBox
+                android:id="@+id/cbSport"
+                android:layout_weight="1"
+                android:text="@string/filter_sport_value"
+                android:textSize="@dimen/font_size_checkbox" />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>
