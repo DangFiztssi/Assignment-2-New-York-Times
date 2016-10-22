@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements FilterSearchDialo
                 .setAction("Setting network", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                        startActivity(new Intent(Settings.ACTION_SETTINGS));
                     }
                 })
                 .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light))
