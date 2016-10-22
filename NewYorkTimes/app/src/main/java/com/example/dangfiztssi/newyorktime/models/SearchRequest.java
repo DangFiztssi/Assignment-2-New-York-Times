@@ -93,8 +93,11 @@ public class SearchRequest implements Parcelable {
     }
 
     public void delValueDesk(int pos) {
-        if (deskValues.contains(pos))
-            deskValues.remove(pos);
+        if (deskValues.contains(pos)) {
+            int at  = deskValues.indexOf(pos);
+            deskValues.remove(at);
+        }
+
     }
 
     public String convertFromDate(long d) {

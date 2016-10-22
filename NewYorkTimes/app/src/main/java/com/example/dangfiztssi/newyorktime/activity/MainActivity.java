@@ -1,7 +1,10 @@
 package com.example.dangfiztssi.newyorktime.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +14,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.dangfiztssi.newyorktime.R;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements FilterSearchDialo
 
         presenter = new MainPresenter(this);
         setupView();
+
         presenter.search();
 
         refreshMain.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -130,6 +135,22 @@ public class MainActivity extends AppCompatActivity implements FilterSearchDialo
 
     @Override
     public void onFinishFilter(SearchRequest result) {
+        waiting.show();
         presenter.search();
+    }
+
+    public void showSnackBar(){
+        if(waiting.isShowing())
+            waiting.dismiss();
+        refreshMain.setRefreshing(false);
+        Snackbar.make(getCurrentFocus(),R.string.message_error_network, Snackbar.LENGTH_INDEFINITE)
+                .setAction("Setting network", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_light))
+                .show();
     }
 }

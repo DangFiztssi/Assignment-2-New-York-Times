@@ -1,9 +1,12 @@
 package com.example.dangfiztssi.newyorktime.presenter;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
 import com.example.dangfiztssi.newyorktime.activity.MainActivity;
+import com.example.dangfiztssi.newyorktime.activity.ViewDetailArticleActivity;
 import com.example.dangfiztssi.newyorktime.adapter.ItemArticleAdapter;
 import com.example.dangfiztssi.newyorktime.api.SearchApi;
 import com.example.dangfiztssi.newyorktime.models.Article;
@@ -42,14 +45,28 @@ public class MainPresenter {
             public void onLoadMore() {
                 searchMore();
             }
+
+            @Override
+            public void onClick(Article article) {
+                Intent i = new Intent(activity, ViewDetailArticleActivity.class);
+                i.putExtra("data",article.getUrl());
+                activity.startActivity(i);
+            }
         });
+
     }
 
     public ItemArticleAdapter getAdapter(){
         return this.adapter;
     }
 
+    public boolean isConnected(){
+        return AppUtils.checkNetwork(activity);
+    }
+
     public void search(){
+        new AsynctaskConnection().execute();
+
         request.resetPage();
 
         fetchArticles(new Listener() {
@@ -66,6 +83,9 @@ public class MainPresenter {
     }
 
     public void searchMore(){
+
+        new AsynctaskConnection().execute();
+
         request.nextPage();
         activity.loadMore.setVisibility(View.VISIBLE);
         fetchArticles(new Listener() {
@@ -98,5 +118,21 @@ public class MainPresenter {
             }
         });
     }
+
+    public class AsynctaskConnection extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return AppUtils.checkNetwork(activity.getApplicationContext());
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(!result){
+                activity.showSnackBar();
+            }
+        }
+    }
+
 
 }

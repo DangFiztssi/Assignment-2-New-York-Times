@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -15,31 +16,37 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textSize="@dimen/font_size_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_between_column"
             android:text="@string/filter_begin_date_label"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_label" />
 
-        <TextView
-            android:id="@+id/tvDateStart"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_between_column"
             android:layout_weight="1"
-            android:background="@drawable/click_background"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:lines="1"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="4dp"
-            android:text="22/10/2016"
-            android:textColor="@android:color/white" />
+            android:gravity="center_horizontal">
 
+            <TextView
+                android:id="@+id/tvDateStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_between_column"
+                android:background="@drawable/click_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:lines="1"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:textColor="@android:color/white"
+                tools:text="22/10/2016" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -51,22 +58,27 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textSize="@dimen/font_size_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_between_column"
-            android:layout_weight="1"
             android:text="@string/filter_sort_order_label"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_label" />
 
-        <Spinner
-            android:id="@+id/spOrder"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_between_column"
-            android:entries="@array/sort_order"
-            android:lines="1" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <Spinner
+                android:id="@+id/spOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_between_column"
+                android:entries="@array/sort_order"
+                android:lines="1" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -79,19 +91,21 @@
         android:orientation="horizontal">
 
         <TextView
-            android:textSize="@dimen/font_size_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_between_column"
             android:layout_weight="1"
             android:text="@string/filter_desk_value_label"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_label" />
     </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:collapseColumns="2">
+        android:collapseColumns="2"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <TableRow>
 

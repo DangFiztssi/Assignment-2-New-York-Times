@@ -3,7 +3,7 @@
 
     <string name="action_search">Search</string>
     <string name="acton_sort">Sort Setting</string>
-    
+
     <string name="filter_begin_date_label">Begin date</string>
     <string name="filter_sort_order_label">Sort order</string>
     <string name="filter_desk_value_label">News desk value</string>
@@ -11,4 +11,7 @@
     <string name="filter_sport_value">Sports</string>
     <string name="filter_fashion_style">Fashion &amp; Style</string>
     <string name="filter_travel">Travel</string>
+
+    <string name="message_error_network">Error network!</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

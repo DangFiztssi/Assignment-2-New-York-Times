@@ -1,16 +1,18 @@
 package com.example.dangfiztssi.newyorktime.activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dangfiztssi.newyorktime.R;
 import com.example.dangfiztssi.newyorktime.models.SearchRequest;
@@ -48,6 +50,8 @@ public class FilterSearchDialogFragment extends DialogFragment {
 
     SearchRequest request;
 
+    long dateTmp = 0;
+
     public interface FilterListener{
         void onFinishFilter(SearchRequest result);
     }
@@ -77,6 +81,8 @@ public class FilterSearchDialogFragment extends DialogFragment {
 
         request = getArguments().getParcelable("data");
 
+        dateTmp = request.getStartDate();
+        setupStartDate(request.getStartDate());
         setupSpinner(request.getIndexOrder());
         setupStartDate(request.getStartDate());
         setupCheckBox(request.getDeskValues());
@@ -96,7 +102,13 @@ public class FilterSearchDialogFragment extends DialogFragment {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
             }
         });
 
@@ -111,13 +123,21 @@ public class FilterSearchDialogFragment extends DialogFragment {
 
     private void setupStartDate(long d){
         tvDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(d * 1000)));
+    }
 
-        tvDate.setOnClickListener(new View.OnClickListener() {
+    private void showDatePicker(){
+        Date date = new Date(dateTmp * 1000);
+        Log.e("date date date", date.getYear() + "");
+        DatePickerDialog dia = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                Date d = new Date(year-1900, month, dayOfMonth);
+                dateTmp = d.getTime() / 1000;
+                setupStartDate(dateTmp);
             }
-        });
+        }, date.getYear() + 1900, date.getMonth(), date.getDate());
+
+        dia.show();
     }
 
     private void setupCheckBox(List<Integer> checkList){
@@ -140,6 +160,8 @@ public class FilterSearchDialogFragment extends DialogFragment {
     }
 
     private void setRequest(){
+        request.setStartDate(dateTmp);
+
         request.setIndexOrder(spOrder.getSelectedItemPosition());
 
         deskValue(cbArts, 0);
