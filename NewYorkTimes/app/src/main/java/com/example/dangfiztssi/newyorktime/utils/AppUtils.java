@@ -52,36 +52,30 @@ public class AppUtils {
     }
 
     private static Interceptor responseIntercepter(){
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Response response = chain.proceed(request);
+        return chain -> {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
 
-                ApiResponse apiResponse = GSON.fromJson(response.body().string(),ApiResponse.class);
+            ApiResponse apiResponse = GSON.fromJson(response.body().string(),ApiResponse.class);
 
-                return response.newBuilder()
-                        .body(ResponseBody.create(JSON,apiResponse.getResponse().toString()))
-                        .build();
-            }
+            return response.newBuilder()
+                    .body(ResponseBody.create(JSON,apiResponse.getResponse().toString()))
+                    .build();
         };
     }
 
     private static Interceptor apikeyInterceptor(){
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                HttpUrl url = request.url()
-                        .newBuilder()
-                        .addQueryParameter("api_key", BuildConfig.API_KEY)
-                        .build();
+        return chain -> {
+            Request request = chain.request();
+            HttpUrl url = request.url()
+                    .newBuilder()
+                    .addQueryParameter("api_key", "227c750bb7714fc39ef1559ef1bd8329")
+                    .build();
 
-                request = request.newBuilder()
-                        .url(url)
-                        .build();
-                return chain.proceed(request);
-            }
+            request = request.newBuilder()
+                    .url(url)
+                    .build();
+            return chain.proceed(request);
         };
     }
 
