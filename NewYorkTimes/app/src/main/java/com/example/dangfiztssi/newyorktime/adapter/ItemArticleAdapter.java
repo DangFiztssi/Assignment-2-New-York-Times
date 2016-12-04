@@ -78,12 +78,7 @@ public class ItemArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             bindNormal((ViewHolder) holder, article);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onClick(article);
-            }
-        });
+        holder.itemView.setOnClickListener(v -> mListener.onClick(article));
 
         if(position == articleList.size()-1 && mListener != null){
             mListener.onLoadMore();
