@@ -5,11 +5,13 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
+import com.example.dangfiztssi.newyorktime.R;
 import com.example.dangfiztssi.newyorktime.activity.MainActivity;
 import com.example.dangfiztssi.newyorktime.activity.ViewDetailArticleActivity;
 import com.example.dangfiztssi.newyorktime.adapter.ItemArticleAdapter;
 import com.example.dangfiztssi.newyorktime.api.SearchApi;
 import com.example.dangfiztssi.newyorktime.models.Article;
+import com.example.dangfiztssi.newyorktime.models.ArticleDataSource;
 import com.example.dangfiztssi.newyorktime.models.ArticleResult;
 import com.example.dangfiztssi.newyorktime.models.SearchRequest;
 import com.example.dangfiztssi.newyorktime.utils.AppUtils;
@@ -28,6 +30,8 @@ public class MainPresenter {
     List<Article> articleList;
     ItemArticleAdapter adapter;
     MainActivity activity;
+
+    ArticleDataSource dataSource;
 
     SearchApi api;
     public SearchRequest request = new SearchRequest();
@@ -53,6 +57,8 @@ public class MainPresenter {
                 activity.startActivity(i);
             }
         });
+
+        dataSource = new ArticleDataSource();
 
     }
 
@@ -93,7 +99,11 @@ public class MainPresenter {
             public void onResponse(ArticleResult result) {
                 adapter.addArticles(result.getArticleList());
 
+                dataSource.store(result.getArticleList());
+                activity.showSnackBar("Saved data");
+
                 activity.loadMore.setVisibility(View.GONE);
+
             }
         });
     }
@@ -129,7 +139,13 @@ public class MainPresenter {
         @Override
         protected void onPostExecute(Boolean result) {
             if(!result){
-                activity.showSnackBar();
+                activity.showSnackBar(activity.getString(R.string.message_error_network));
+
+                Log.e("restore data", "onPostExecute: ...................." );
+                activity.showSnackBar("restoring data....");
+                List<Article> articles = dataSource.getAll();
+                adapter.setArticles(articles);
+
             }
         }
     }

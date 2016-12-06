@@ -139,11 +139,11 @@ public class MainActivity extends AppCompatActivity implements FilterSearchDialo
         presenter.search();
     }
 
-    public void showSnackBar(){
+    public void showSnackBar(String msg){
         if(waiting.isShowing())
             waiting.dismiss();
         refreshMain.setRefreshing(false);
-        Snackbar.make(getCurrentFocus(),R.string.message_error_network, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(getCurrentFocus(),msg, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Setting network", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

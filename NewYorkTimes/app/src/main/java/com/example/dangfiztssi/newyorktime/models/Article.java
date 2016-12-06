@@ -3,6 +3,7 @@ package com.example.dangfiztssi.newyorktime.models;
 import com.example.dangfiztssi.newyorktime.utils.AppContants;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,15 @@ public class Article {
 
     @SerializedName("multimedia")
     private List<Multimedia> multimedia;
+
+    public Article(ArticleEntity entity){
+        this.url = entity.getUrl();
+        this.snippet = entity.getSnippet();
+        multimedia = new ArrayList<>();
+        for (MultimediaEntity m : entity.getMultimedia()) {
+            multimedia.add(new Multimedia(m));
+        }
+    }
 
     public String getUrl() {
         return url;
@@ -57,6 +67,11 @@ public class Article {
 
         @SerializedName("url")
         private String url;
+
+        public Multimedia(MultimediaEntity entity){
+            this.height = entity.getHeight();
+            this.url = entity.getUrl();
+        }
 
         public int getHeight() {
             return height;
